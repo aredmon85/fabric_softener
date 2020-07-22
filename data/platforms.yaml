@@ -1,0 +1,239 @@
+platforms: 
+	QFX5120-32C:
+		capacity: 3200
+		skus:
+			- QFX5120-32C-AFI:
+				airflow: in
+				power: ac
+				port_combinations:
+					- 0
+					- 1
+			- QFX5120-32C-AFO:
+				airflow: out
+				power: ac
+				port_combinations:
+					- 0
+					- 1
+			- QFX5120-32C-DC-AFI:
+				airflow: in
+				power: dc
+				port_combinations:
+					- 0
+					- 1
+			- QFX5120-32C-DC-AFO:
+				airflow: out
+				power: dc
+				port_combinations:
+					- 0
+					- 1
+		VXLAN: true
+		max_power_draw: 515
+		recommended_software: 18.4R3
+	QFX5120-48T:
+		capacity: 3200
+		skus:
+			- QFX5120-48T-AFI:
+				airflow: in
+				power: ac
+				port_combinations:
+					- 2
+					- 3
+			- QFX5120-48T-AFO:
+				airflow: out
+				power: ac
+				port_combinations:
+					- 2
+					- 3
+			- QFX5120-48T-DC-AFI:
+				airflow: in
+				power: dc
+				port_combinations:
+					- 2
+					- 3
+			- QFX5120-48T-DC-AFO:
+				airflow: out
+				power: dc
+				port_combinations:
+					- 2
+					- 3
+		VXLAN: true
+		max_power_draw: 450
+		recommended_software: 18.4R3
+	QFX5120-48Y:
+		capacity: 3200
+		skus:
+			- QFX5120-48Y-AFI2:
+                                airflow: in
+                                power: ac
+                                port_combinations:
+                                        - 4
+					- 5
+			- QFX5120-48Y-AFO2:
+                                airflow: out
+                                power: ac
+                                port_combinations:
+                                        - 4
+					- 5
+			- QFX5120-48Y-DC-AFI2:
+                                airflow: in
+                                power: dc
+                                port_combinations:
+                                        - 4
+					- 5
+			- QFX5120-48Y-DC-AFO2:
+                                airflow: out
+                                power: dc
+                                port_combinations:
+                                        - 4
+					- 5
+		VXLAN: true
+		max_power_draw: 450
+		recommended_software: 18.4R3
+	QFX5210-64C:
+		capacity: 6400
+		skus:
+			- QFX5210-64C-AFI:
+                                airflow: in
+                                power: ac
+                                port_combinations:
+                                        - 6
+					- 7
+                        - QFX5210-64C-AFO:
+                                airflow: out
+                                power: ac
+                                port_combinations:
+                                        - 6
+					- 7
+			- QFX5210-64C-DC-AFI:
+                                airflow: in
+                                power: dc
+                                port_combinations:
+                                        - 6
+					- 7
+			- QFX5210-64C-DC-AFO:
+                                airflow: out
+                                power: dc
+                                port_combinations:
+                                        - 6
+					- 7
+		VXLAN: true	
+		max_power_draw: 960
+		recommended_software: 18.4R3
+	QFX5220-32D:
+                capacity: 12800
+                skus:
+			- QFX5220-32CD-FANAI:
+                                airflow: in
+                                power: ac
+                                port_combinations:
+					- 8
+			- QFX5220-32CD-FANAO:
+                                airflow: out
+                                power: ac
+                                port_combinations:
+					- 8
+		VXLAN: false
+		max_power_draw: 958
+		recommended_software: 19.2R1
+	QFX5220-128C:
+                capacity: 12800
+                skus:
+			- QFX5220-128C-FANAO:
+                                airflow: out
+                                power: ac
+                                port_combinations:
+                                        - 9
+		VXLAN: false
+		max_power_draw: 1990
+                recommended_software: 19.2R1 
+port_combinations:
+	0: 
+	  RJ45-1G: 0
+	  SFP: 0
+	  SFP+: 0
+	  RJ45-10G:
+	  SFP28: 0
+	  QSFP: 0
+	  QSFP+: 32
+	  QSFP28: 0
+	  QSFP56-DD: 0
+	1:
+	  RJ45-1G: 0
+	  SFP: 0
+	  SFP+: 0
+	  RJ45-10G: 0
+	  SFP28: 0
+	  QSFP: 0
+	  QSFP+: 0
+	  QSFP28: 32
+          QSFP56-DD: 0
+	2: 
+	  RJ45-1G: 0
+	  SFP: 0
+	  SFP+: 0
+	  RJ45-10G: 0
+	  SFP28: 48
+	  QSFP: 0
+	  QSFP+: 0
+	  QSFP28: 8
+          QSFP56-DD: 0
+	3:
+	  RJ45-1G: 0
+	  SFP: 0
+	  SFP+: 0
+	  RJ45-10G: 0
+	  SFP28: 48
+	  QSFP: 0
+	  QSFP+: 8
+	  QSFP28: 0
+          QSFP56-DD: 0
+	4:
+	  RJ45-1G: 0
+	  SFP: 0
+	  SFP+: 48
+	  RJ45-10G: 0
+	  SFP28: 0
+	  QSFP: 0
+	  QSFP+: 0
+	  QSFP28: 8
+          QSFP56-DD: 0
+	5:
+	  RJ45-1G: 0
+	  SFP: 0
+	  SFP+: 0
+	  RJ45-10G: 0
+	  SFP28: 48
+	  QSFP: 0
+	  QSFP+: 0
+	  QSFP28: 8
+          QSFP56-DD: 0
+        6:
+          RJ45-1G: 0
+          SFP: 0
+          SFP+: 0
+          RJ45-10G: 0
+          SFP28: 0
+          QSFP: 0
+          QSFP+: 64
+          QSFP28: 0
+          QSFP56-DD: 0
+        7:
+          RJ45-1G: 0
+          SFP: 0
+          SFP+: 0
+          RJ45-10G: 0
+          SFP28: 0
+          QSFP: 0
+          QSFP+: 0
+          QSFP28: 64
+          QSFP56-DD: 0
+        8:
+          RJ45-1G: 0
+          SFP: 0
+          SFP+: 0
+          RJ45-10G: 0
+          SFP28: 0
+          QSFP: 0
+          QSFP+: 0
+          QSFP28: 128
+          QSFP56-DD: 0

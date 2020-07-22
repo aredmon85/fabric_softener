@@ -1,4 +1,8 @@
 fabric:
+	#Facility Power current selection
+	facility_power_requirement: ac
+	#Facility airflow selection
+	facility_air_flow_requirement: in
 	#User defined edge capacity for the topology - e.g., how much bandwidth the edge of the fabric should vend towards the internet or other networks
 	edge_facing_capacity: 800G
 	#User defined hosts - this drives the fabric requirements.
