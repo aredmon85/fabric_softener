@@ -12,7 +12,7 @@ class ccolors:
 
 def load_yaml_config_file(config_file):
     with open(config_file, 'r') as f:
-        config = yaml.load(f)
+        config = yaml.load(f,Loader=yaml.FullLoader)
     return config
 
 def printfailure(message):
@@ -28,4 +28,4 @@ def log_error_and_exit(log_msg):
     sys.exit(1)
 
 def validate_fabric_config(fabric_config):
-	return true	
+	return True	

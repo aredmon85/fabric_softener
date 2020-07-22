@@ -1,35 +1,42 @@
 fabric:
-	#Facility Power current selection
-	facility_power_requirement: ac
-	#Facility airflow selection
-	facility_air_flow_requirement: in
-	#User defined edge capacity for the topology - e.g., how much bandwidth the edge of the fabric should vend towards the internet or other networks
-	edge_facing_capacity: 800G
-	#User defined hosts - this drives the fabric requirements.
-	hosts:
-		  #User defined name for host type
-		- host_type: compute1
-                  host_count: 40
-		  #Fabric facing interfaces
-		  network_interfaces:
-			- { speed: 10G, media: fiber, mtu: 1500 }
-                - host_type: compute2
-                  host_count: 40
-                  #Fabric facing interfaces
-                  network_interfaces:
-                        - { speed: 10G, media: fiber, mtu: 1500 }
-	#User defined addressing - this ensures the addressing used is compatible with the user's existing network
-	addressing:
-		- network_point_to_points: 
-			range: 169.254.0.0/16
-			exclude:
-				- 169.254.255.255
-		- loopbacks:  
-			range: 10.99.0.0/16 
-			exclude:
-				- 10.99.0.1
-		- management_network: 
-			range: 10.125.0.0/16
-			exclude:
-				- 10.125.0.1
-				- 10.125.0.255
+   #Facility Power current selection
+   facility_power_requirement: ac
+   #Facility airflow selection
+   facility_air_flow_requirement: in
+   #User defined edge capacity for the topology - e.g., how much bandwidth the edge of the fabric should vend towards the internet or other networks
+   edge_facing_capacity: 1000
+   #User defined hosts - this drives the fabric requirements.
+   total_racks: 10
+   hosts:
+        #User defined name for host type
+      - host_type: compute1
+        host_count: 100
+        hosts_per_rack: 25
+        max_power_per_host: 500
+        #Fabric facing interfaces, excluding IPMI/DRAC interfaces
+        network_interfaces:
+        ###Speed in gigabits
+        - { speed: 10, media: fiber, mtu: 1500 }
+      - host_type: compute2
+        host_count: 100
+        hosts_per_rack: 25
+        max_power_per_host: 500
+        #Fabric facing interfaces, excluding IPMI/DRAC interfaces
+        network_interfaces:
+        ###Speed in gigabits
+        - { speed: 10, media: fiber, mtu: 1500 }
+   #User defined addressing - this ensures the addressing used is compatible with the user's existing network
+   addressing:
+      - network_point_to_points: 
+         range: 169.254.0.0/16
+         exclude:
+            - 169.254.255.255
+      - loopbacks:  
+         range: 10.99.0.0/16 
+         exclude:
+            - 10.99.0.1
+      - management_network: 
+         range: 10.125.0.0/16
+         exclude:
+            - 10.125.0.1
+            - 10.125.0.255
