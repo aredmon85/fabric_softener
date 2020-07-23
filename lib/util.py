@@ -41,3 +41,17 @@ def calculate_sub_ratio(sub_ratio):
 
 def validate_fabric_config(fabric_config):
 	return True	
+
+def is_ip_address(sval):
+    try:
+        ipaddress.IPv4Address(unicode(sval))
+        return True
+    except ValueError:
+        return False
+
+def is_ip_network(sval):
+    try:
+        ipaddress.ip_network(unicode(sval),strict=False)
+        return True
+    except ValueError:
+        return False

@@ -7,6 +7,7 @@ import yaml
 import ipaddress
 import lib.util as util
 from lib.rack import Rack
+from lib.fabric import Fabric
 import json
 from jinja2 import Environment, FileSystemLoader
 
@@ -31,18 +32,7 @@ def main():
       ###Determine the total number of racks needing connectivity
       ###the total number of interfaces and speeds of the interfaces for those racks
       ###and the total amount of rack facing network capacity required.
-      requirements = {}
-      requirements['racks'] = []
-      requirements['total_racks'] = 0
-      requirements['total_client_facing_capacity'] = 0
-      rack_id = 0
-      for rack in fabric_config['fabric']['racks']:
-         requirements['total_racks'] += rack['rack_count']   
-         rack['rack_id'] = rack_id
-         requirements['racks'].append(Rack(rack))
-         print "VXLAN Requirement for rack "+str(requirements['racks'][rack_id].rack_id)+" is: "+str(requirements['racks'][rack_id].vxlan_required)
-         rack_id += 1
-   
+      fabric = Fabric(fabric_config) 
 
 
 

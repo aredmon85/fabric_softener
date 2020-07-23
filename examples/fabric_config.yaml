@@ -23,22 +23,21 @@ fabric:
         ### QSFPP
         ### QSFP28
         ### QSFP56-DD
-
         ###Speed in gigabits
         - { speed: 10, optic: SFPP, mtu: 1500, count: 30 }
         - { speed: 10, optic: SFPP-T, mtu: 1500, count: 10 }
    #User defined addressing - this ensures the addressing used is compatible with the user's existing network
    addressing:
-      - network_point_to_points: 
+      network_point_to_points: 
          range: 169.254.0.0/16
          exclude:
-            - 169.254.255.255
-      - loopbacks:  
+            - 169.254.255.255/32
+      loopbacks:  
          range: 10.99.0.0/16 
          exclude:
-            - 10.99.0.1
-      - management_network: 
+            - 10.99.0.1/32
+      management_network: 
          range: 10.125.0.0/16
          exclude:
-            - 10.125.0.1
-            - 10.125.0.255
+            - 10.125.0.0/30
+            - 10.125.0.255/32
