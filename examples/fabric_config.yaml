@@ -1,30 +1,20 @@
 fabric:
    #Facility Power current selection
-   facility_power_requirement: ac
    #Facility airflow selection
-   facility_air_flow_requirement: in
    #User defined edge capacity for the topology - e.g., how much bandwidth the edge of the fabric should vend towards the internet or other networks
    edge_facing_capacity: 1000
    #User defined hosts - this drives the fabric requirements.
-   total_racks: 10
-   hosts:
+   racks:
         #User defined name for host type
-      - host_type: compute1
-        host_count: 100
-        hosts_per_rack: 25
-        max_power_per_host: 500
-        #Fabric facing interfaces, excluding IPMI/DRAC interfaces
+      - rack_name: compute1
+        rack_power_current: ac
+        rack_airflow_direction: in
+        rack_count: 24
+	#Fabric facing interfaces, excluding IPMI/DRAC interfaces
         network_interfaces:
         ###Speed in gigabits
-        - { speed: 10, media: fiber, mtu: 1500 }
-      - host_type: compute2
-        host_count: 100
-        hosts_per_rack: 25
-        max_power_per_host: 500
-        #Fabric facing interfaces, excluding IPMI/DRAC interfaces
-        network_interfaces:
-        ###Speed in gigabits
-        - { speed: 10, media: fiber, mtu: 1500 }
+        - { speed: 10, media: fiber, mtu: 1500, count: 30 }
+        - { speed: 10, media: copper, mtu: 1500, count: 10 }
    #User defined addressing - this ensures the addressing used is compatible with the user's existing network
    addressing:
       - network_point_to_points: 
