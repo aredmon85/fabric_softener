@@ -1,20 +1,32 @@
 fabric:
-   #Facility Power current selection
-   #Facility airflow selection
    #User defined edge capacity for the topology - e.g., how much bandwidth the edge of the fabric should vend towards the internet or other networks
    edge_facing_capacity: 1000
-   #User defined hosts - this drives the fabric requirements.
+   #User defined racks within the datacenter - this drives the fabric requirements.  Each rack is considered a client of the fabric and will host at least 1 TOR.
    racks:
         #User defined name for host type
-      - rack_name: compute1
-        rack_power_current: ac
-        rack_airflow_direction: in
+      - name: compute1
+        power_current: ac
+        subscription_ratio_to_fabric: "1:1"
+        airflow_direction: in
+        power_available_for_network: 1000
         rack_count: 24
-	#Fabric facing interfaces, excluding IPMI/DRAC interfaces
+        vxlan_required: false
+        #Fabric facing interfaces, excluding IPMI/DRAC interfaces
         network_interfaces:
+        ###Options include:
+        ### RJ45
+        ### SFP
+        ### SFPP
+        ### SFPP-T
+        ### SFP28
+        ### QSFP
+        ### QSFPP
+        ### QSFP28
+        ### QSFP56-DD
+
         ###Speed in gigabits
-        - { speed: 10, media: fiber, mtu: 1500, count: 30 }
-        - { speed: 10, media: copper, mtu: 1500, count: 10 }
+        - { speed: 10, optic: SFPP, mtu: 1500, count: 30 }
+        - { speed: 10, optic: SFPP-T, mtu: 1500, count: 10 }
    #User defined addressing - this ensures the addressing used is compatible with the user's existing network
    addressing:
       - network_point_to_points: 

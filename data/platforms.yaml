@@ -37,25 +37,21 @@ platforms:
             power: ac
             port_combinations:
                - 2
-               - 3
          - QFX5120-48T-AFO:
             airflow: out
             power: ac
             port_combinations:
                - 2
-               - 3
          - QFX5120-48T-DC-AFI:
             airflow: in
             power: dc
             port_combinations:
                - 2
-               - 3
          - QFX5120-48T-DC-AFO:
             airflow: out
             power: dc
             port_combinations:
                - 2
-               - 3
       VXLAN: true
       max_power_draw: 450
       recommended_software: 18.4R3
@@ -148,92 +144,92 @@ platforms:
       recommended_software: 19.2R1 
 port_combinations:
    0: 
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G:
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 0
      QSFP: 0
-     QSFP+: 32
+     QSFPP: 32
      QSFP28: 0
      QSFP56-DD: 0
    1:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 0
      QSFP: 0
-     QSFP+: 0
+     QSFPP: 0
      QSFP28: 32
      QSFP56-DD: 0
    2: 
-     RJ45-1G: 0
+     RJ45: 48
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
-     SFP28: 48
+     SFPP: 0
+     SFPP-T: 0
+     SFP28: 0
      QSFP: 0
-     QSFP+: 0
+     QSFPP: 0
      QSFP28: 8
      QSFP56-DD: 0
    3:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 48
      QSFP: 0
-     QSFP+: 8
+     QSFPP: 8
      QSFP28: 0
      QSFP56-DD: 0
    4:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 48
-     RJ45-10G: 0
+     SFPP: 48
+     SFPP-T: 0
      SFP28: 0
      QSFP: 0
-     QSFP+: 0
+     QSFPP: 0
      QSFP28: 8
      QSFP56-DD: 0
    5:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 48
      QSFP: 0
-     QSFP+: 0
+     QSFPP: 0
      QSFP28: 8
      QSFP56-DD: 0
    6:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 0
      QSFP: 0
-     QSFP+: 64
+     QSFPP: 64
      QSFP28: 0
      QSFP56-DD: 0
    7:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 0
      QSFP: 0
-     QSFP+: 0
+     QSFPP: 0
      QSFP28: 64
      QSFP56-DD: 0
    8:
-     RJ45-1G: 0
+     RJ45: 0
      SFP: 0
-     SFP+: 0
-     RJ45-10G: 0
+     SFPP: 0
+     SFPP-T: 0
      SFP28: 0
      QSFP: 0
-     QSFP+: 0
+     QSFPP: 0
      QSFP28: 128
      QSFP56-DD: 0

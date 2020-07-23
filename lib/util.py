@@ -27,5 +27,17 @@ def log_error_and_exit(log_msg):
     sys.stderr.write(ccolors.FAILURE + "ERROR: "+log_msg+"\n" + ccolors.ENDCOLOR)
     sys.exit(1)
 
+def calculate_sub_ratio(sub_ratio):
+   if ":" not in str(sub_ratio):
+      return -1
+   else:
+      try:
+         divisor = float(sub_ratio.split(":")[0])
+         dividend = float(sub_ratio.split(":")[1])
+         return (dividend / divisor)
+      except:
+         return -1
+   return -1
+
 def validate_fabric_config(fabric_config):
 	return True	
