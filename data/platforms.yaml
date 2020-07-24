@@ -1,5 +1,5 @@
 platforms: 
-   QFX5120-32C:
+    - model: QFX5120-32C
       capacity: 3200
       skus:
          - QFX5120-32C-AFI:
@@ -26,10 +26,11 @@ platforms:
             port_combinations:
                - 0
                - 1
-      VXLAN: true
+      vxlan: true
       max_power_draw: 515
+      avg_power_draw: 200
       recommended_software: 18.4R3
-   QFX5120-48T:
+    - model: QFX5120-48T
       capacity: 3200
       skus:
          - QFX5120-48T-AFI:
@@ -52,10 +53,11 @@ platforms:
             power: dc
             port_combinations:
                - 2
-      VXLAN: true
+      vxlan: true
       max_power_draw: 450
+      avg_power_draw: 200
       recommended_software: 18.4R3
-   QFX5120-48Y:
+    - model: QFX5120-48Y
       capacity: 3200
       skus:
          - QFX5120-48Y-AFI2:
@@ -82,10 +84,11 @@ platforms:
               port_combinations:
                - 4
                - 5
-      VXLAN: true
+      vxlan: true
       max_power_draw: 450
+      avg_power_draw: 200
       recommended_software: 18.4R3
-   QFX5210-64C:
+    - model: QFX5210-64C
       capacity: 6400
       skus:
          - QFX5210-64C-AFI:
@@ -112,10 +115,11 @@ platforms:
               port_combinations:
                - 6
                - 7
-      VXLAN: true   
+      vxlan: true   
       max_power_draw: 960
+      avg_power_draw: 200
       recommended_software: 18.4R3
-   QFX5220-32D:
+    - model:  QFX5220-32D
       capacity: 12800
       skus:
          - QFX5220-32CD-FANAI:
@@ -128,10 +132,11 @@ platforms:
               power: ac
               port_combinations:
                - 8
-      VXLAN: false
+      vxlan: false
       max_power_draw: 958
+      avg_power_draw: 200
       recommended_software: 19.2R1
-   QFX5220-128C:
+    - model: QFX5220-128C
       capacity: 12800
       skus:
          - QFX5220-128C-FANAO:
@@ -139,8 +144,9 @@ platforms:
               power: ac
               port_combinations:
                - 9
-      VXLAN: false
+      vxlan: false
       max_power_draw: 1990
+      avg_power_draw: 200
       recommended_software: 19.2R1 
 port_combinations:
    0: 

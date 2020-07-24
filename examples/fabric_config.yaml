@@ -12,7 +12,7 @@ fabric:
         rack_count: 24
         vxlan_required: false
         #Fabric facing interfaces, excluding IPMI/DRAC interfaces
-        network_interfaces:
+        host_network_interfaces:
         ###Options include:
         ### RJ45
         ### SFP
