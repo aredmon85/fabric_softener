@@ -40,8 +40,8 @@ class Fabric:
       network_addressing = Network_addressing(fabric_config_dict['fabric']['addressing']) 
       print "Total rack facing capacity required: "+str(self.rack_facing_capacity)
       print "Total edge facing capacity required: "+str(self.edge_facing_capacity)
-      
-
-   def build_tors(platform_data):
-      for rack in racks:
-        print rack 
+ 
+   def build_tors(self, platform_engine):
+      print "Building tors"
+      for rack in self.racks:
+         platform_engine.match_tor_to_rack_requirements(rack)

@@ -9,6 +9,7 @@ import lib.util as util
 from lib.rack import Rack
 from lib.fabric import Fabric
 from lib.tor import Tor
+from lib.platform_engine import Platform_engine
 import json
 from jinja2 import Environment, FileSystemLoader
 
@@ -34,11 +35,9 @@ def main():
       ###the total number of interfaces and speeds of the interfaces for those racks
       ###and the total amount of rack facing network capacity required.
       fabric = Fabric(fabric_config) 
-      tors = []
-      for platform in platform_data['platforms']:
-         tors.append(Tor(platform))
-         
-
+      platform_engine = Platform_engine(platform_data) 
+      fabric.build_tors(platform_engine)
+ 
    else:
       parser.print_usage()
 if __name__ == "__main__":
