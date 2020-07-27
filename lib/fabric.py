@@ -44,4 +44,4 @@ class Fabric:
    def build_tors(self, platform_engine):
       print "Building tors"
       for rack in self.racks:
-         platform_engine.match_tor_to_rack_requirements(rack)
+         rack.tors(append(platform_engine.match_tor_to_rack_requirements(rack))
