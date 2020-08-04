@@ -4,10 +4,10 @@ fabric:
    #User defined racks within the datacenter - this drives the fabric requirements.  Each rack is considered a client of the fabric and will host at least 1 TOR.
    racks:
         #User defined name for host type
-      - name: compute1
-        power_current: ac
+      - name: "compute1"
+        power_current: "ac"
         subscription_ratio_to_fabric: "1:1"
-        airflow_direction: in
+        airflow_direction: "in"
         power_available_for_network: 1000
         rack_count: 24
         vxlan_required: false
@@ -24,8 +24,8 @@ fabric:
         ### QSFP28
         ### QSFP56-DD
         ###Speed in gigabits
-        - { speed: 10, optic: SFPP, mtu: 1500, count: 30 }
-        - { speed: 10, optic: SFPP-T, mtu: 1500, count: 10 }
+        - { speed: 10, form_factor: SFPP, mtu: 1500, count: 30 }
+        - { speed: 10, form_factor: SFPP-T, mtu: 1500, count: 10 }
    #User defined addressing - this ensures the addressing used is compatible with the user's existing network
    addressing:
       network_point_to_points: 

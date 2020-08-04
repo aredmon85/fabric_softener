@@ -42,6 +42,6 @@ class Fabric:
       print "Total edge facing capacity required: "+str(self.edge_facing_capacity)
  
    def build_tors(self, platform_engine):
-      print "Building tors"
-      for rack in self.racks:
-         rack.tors(append(platform_engine.match_tor_to_rack_requirements(rack))
+     tors = [] 
+     for rack in self.racks:
+         tors.append(platform_engine.get_matching_tors_for_reqs(rack))

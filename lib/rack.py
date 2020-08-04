@@ -5,7 +5,7 @@ import csv
 import yaml
 import util
 import math
-from host_networking import Host_networking
+from ports import Ports 
 class Rack:
    required_attributes = [
       "rack_id", 
@@ -21,7 +21,7 @@ class Rack:
    tors = [] 
    total_required_host_network_capacity = 0
    total_required_fabric_network_capacity = 0  
-   rack_host_networking = None
+   ports = None
    rack_count = 0
    ###It's important to use faster interfaces towards the spine than towards hosts to avoid congestion resulting from large/fat/elephant flows
    largest_potential_flow_size = 0
@@ -37,7 +37,6 @@ class Rack:
       except ValueError:
          util.log_error_and_exit("Invalid value found for rack count for rack "+str(self.name)+" in provided fabric configuration")
  
-      rack_host_networking =  Host_networking(self.host_network_interfaces,self.name)
       for nic in self.host_network_interfaces:
          ###Sum the total required host network capacity in the rack
          self.total_required_host_network_capacity += nic['speed'] * nic['count']
@@ -45,13 +44,13 @@ class Rack:
          if nic['speed'] > self.largest_potential_flow_size:
             self.largest_potential_flow_size = nic['speed']
 
-      self.rack_host_networking = Host_networking(self.host_network_interfaces, self.name)
       self.total_required_fabric_network_capacity = math.ceil(util.calculate_sub_ratio(self.subscription_ratio_to_fabric) * self.total_required_host_network_capacity)
       if(self.total_required_fabric_network_capacity < 0):
          util.log_error_and_exit("Oversubscription ratio for rack "+str(self.name)+" of "+str(self.subscription_ratio_to_fabric)+" is invalid")
-      
-      
-      
+      self.ports = Ports(self.host_network_interfaces,True)
+      self.ports.update_uplink_ports(self.total_required_fabric_network_capacity,self.largest_potential_flow_size)      
+      for port in self.ports.ports_list:
+         print port
       ###print "Interfaces needed: "+str(self.rack_host_networking.host_interfaces_total)
       ###print "Total fabric network capacity required: "+str(self.total_required_fabric_network_capacity)            
       ###print "Rack created with a total host network capacity requirement of "+str(self.total_required_host_network_capacity)+" gigabits"
