@@ -6,6 +6,8 @@ import yaml
 import util
 import math
 from ports import Ports 
+from fabric_ports import Fabric_ports
+from host_ports import Host_ports
 class Rack:
    required_attributes = [
       "rack_id", 
@@ -21,7 +23,8 @@ class Rack:
    tors = [] 
    total_required_host_network_capacity = 0
    total_required_fabric_network_capacity = 0  
-   ports = None
+   host_ports = None
+   fabric_ports = None
    rack_count = 0
    ###It's important to use faster interfaces towards the spine than towards hosts to avoid congestion resulting from large/fat/elephant flows
    largest_potential_flow_size = 0
@@ -47,10 +50,9 @@ class Rack:
       self.total_required_fabric_network_capacity = math.ceil(util.calculate_sub_ratio(self.subscription_ratio_to_fabric) * self.total_required_host_network_capacity)
       if(self.total_required_fabric_network_capacity < 0):
          util.log_error_and_exit("Oversubscription ratio for rack "+str(self.name)+" of "+str(self.subscription_ratio_to_fabric)+" is invalid")
-      self.ports = Ports(self.host_network_interfaces,True)
-      self.ports.update_uplink_ports(self.total_required_fabric_network_capacity,self.largest_potential_flow_size)      
-      for port in self.ports.ports_list:
-         print port
+      self.host_ports = Host_ports(self.host_network_interfaces)
+      self.fabric_ports = Fabric_ports(self.total_required_fabric_network_capacity, self.largest_potential_flow_size)
+      #self.spine_ports.update_spine_ports(self.total_required_fabric_network_capacity,self.largest_potential_flow_size)      
       ###print "Interfaces needed: "+str(self.rack_host_networking.host_interfaces_total)
       ###print "Total fabric network capacity required: "+str(self.total_required_fabric_network_capacity)            
       ###print "Rack created with a total host network capacity requirement of "+str(self.total_required_host_network_capacity)+" gigabits"

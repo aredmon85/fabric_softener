@@ -36,7 +36,7 @@ def main():
       ###and the total amount of rack facing network capacity required.
       fabric = Fabric(fabric_config) 
       platform_engine = Platform_engine(platform_data) 
-      fabric.build_tors(platform_engine)
+      fabric.generate_fabric(platform_engine)
  
    else:
       parser.print_usage()

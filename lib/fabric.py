@@ -5,6 +5,9 @@ import csv
 import yaml
 import util
 import math
+import copy
+from stage import Stage
+from tor import Tor
 from rack import Rack
 from network_addressing import Network_addressing
 class Fabric:
@@ -18,8 +21,9 @@ class Fabric:
    rack_facing_capacity = 0
    addressing = []  
    rack_id = 0
+   current_stage = 0
+   stages = []
    def __init__(self, fabric_config_dict):
-      
       if fabric_config_dict.has_key("fabric"):
          for key in self.required_keys:
             if not fabric_config_dict['fabric'].has_key(key):
@@ -40,8 +44,34 @@ class Fabric:
       network_addressing = Network_addressing(fabric_config_dict['fabric']['addressing']) 
       print "Total rack facing capacity required: "+str(self.rack_facing_capacity)
       print "Total edge facing capacity required: "+str(self.edge_facing_capacity)
- 
+       
    def build_tors(self, platform_engine):
-     tors = [] 
-     for rack in self.racks:
-         tors.append(platform_engine.get_matching_tors_for_reqs(rack))
+      tors = [] 
+      northbound_ports = []
+      for rack in self.racks:
+         for idx in range(0,rack.rack_count):
+            sku = platform_engine.get_matching_tors_for_reqs(rack)
+            tors.append(Tor(rack,idx,sku))        
+            #southbound_ports.append(rack.fabric_ports)
+      #self.stages.append(Stage(self.current_stage, southbound_ports, 1))
+      #self.stages[self.current_stage].devices = copy.deepcopy(tors)
+      #self.current_stage += 1
+      print "A total of "+str(len(tors))+" TORs has been created"
+  
+   def generate_fabric(self, platform_engine):
+      tors = []
+      southbound_ports = []
+      self.build_tors(platform_engine)
+      ###Generate T1
+      for rack in self.racks:
+         for idx in range(0,rack.rack_count):
+            southbound_ports.append(rack.fabric_ports)
+            tors.append(Tor(rack,idx,sku))
+      self.stages.append(Stage(self.current_stage, southbound_ports, 1))
+      self.stages[self.current_stage].devices = copy.deepcopy(tors)
+      self.current_stage += 1
+
+
+
+   
+      

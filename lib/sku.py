@@ -27,4 +27,4 @@ class Sku:
             util.log_error_and_exit("SKU data is missing "+key+" for SKU: "+str(sku['sku'])) 
       for key, value in sku_dict.items():
          setattr(self, key, value)
-      self.ports = Ports(self.network_interfaces,False)
+      self.ports = Ports(self.network_interfaces)
