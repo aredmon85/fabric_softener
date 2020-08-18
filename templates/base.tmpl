@@ -1,0 +1,113 @@
+host-name {{ device.name }};
+domain-name example.com;
+time-zone America/New_York;
+no-redirects;
+no-redirects-ipv6;
+no-ping-record-route;
+arp {
+    aging-timer 30;
+}
+internet-options {
+    icmpv4-rate-limit packet-rate 100;
+    path-mtu-discovery;
+    no-source-quench;
+}
+root-authentication {
+    encrypted-password "$6$HG5lENt4$GCfe.JZD24R50Kcm/iincO2yl5Z4N6GamTMKt7ZMAeerqowHOXg3HkkL/zyVyEcA5kZ7z0rqpXgcAQfk9O9jU/"; ## SECRET-DATA
+}
+name-server {
+    8.8.8.8;
+    8.8.4.4;
+}
+services {
+    ssh {
+        root-login deny;
+        protocol-version v2;
+    }
+}
+syslog {
+    archive size 100k files 3;
+    user * {
+        any emergency;
+    }
+    host 10.10.0.31 {
+        any warning;
+        explicit-priority;
+    }
+    file messages {
+        any warning;
+        explicit-priority;
+    }
+    file interactive-commands {
+        interactive-commands error;
+    }
+    file traffic-log {
+        any any;
+        match RT_FLOW_SESSION;
+    }
+    file syslog {
+        any any;
+        explicit-priority;
+    }
+    source-address 10.10.0.1;
+}
+max-configurations-on-flash 5;
+max-configuration-rollbacks 5;
+commit {
+    delta-export;
+    persist-groups-inheritance;
+}
+ntp {
+    server 45.79.1.70;
+    server 108.61.73.244;
+    source-address 73.195.161.233;
+}
+interfaces {
+   {% for link in links %}
+   interface {{link.local_port}} {
+      {% if link.remote_device is not none %}
+      description "{{link.remote_device}}::{{link.remote_port}}"
+      {% endif %}
+      unit 0 {
+      {% if link.local_address is not none %}
+         family inet {
+            address {{link.local_address}};
+         }
+      {% endif %}
+      }
+   }
+   {% endfor %}
+   interface lo0 {
+      unit 0 {
+         family inet {
+            address {{device.loopback_address}};
+         }
+      }
+   }
+      
+}
+protocols {
+    bgp {
+        group EBGP {
+            type external;
+            hold-time 30;
+            log-updown;
+            family inet {
+                unicast;
+            }
+            peer-as 65001;
+            local-as 65002;
+            {% for link in links %}
+            {% if link.remote_address is not none %} 
+            neighbor {{ link.remote_address }} {
+                local-address {{link.local_address}};
+            }
+            {% endif %}
+            {% endfor %}
+        }
+    }
+    lldp {
+        port-id-subtype interface-name;
+        interface all;
+    }
+}

@@ -55,3 +55,35 @@ def is_ip_network(sval):
         return True
     except ValueError:
         return False
+
+def is_form_factor_compatible(left_form_factor,right_form_factor):
+   if left_form_factor == right_form_factor:
+      return True
+   if left_form_factor == 'SFPP' and right_form_factor == 'SFP28':
+      return True
+   if right_form_factor == 'SFPP' and left_form_factor == 'SFP28':
+      return True
+   if right_form_factor == 'SFPP-T' and left_form_factor == 'SFP28':
+      return True
+   return False
+
+def is_intersect(list1,list2):
+   for i in list1:
+     if i in list2:
+        return True
+   return False
+
+def write_file(device_config,filename,outdir):
+    name = outdir + filename
+    tidy_config = remove_blank_lines(device_config)
+    with open(name, "w") as f:
+        f.write(tidy_config)
+
+def remove_blank_lines(config):
+    ###Remove blank lines from the config file
+    tidy_config = ""
+    for line in config.splitlines():
+        if line.rstrip():
+            tidy_config += line + "\n"
+    return tidy_config
+

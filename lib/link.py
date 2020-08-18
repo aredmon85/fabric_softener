@@ -15,6 +15,7 @@ class Link:
    remote_form_factor = None
    local_speed = None
    remote_speed = None
+   subnet = None
    def __init__(self, local_device, local_port, local_form_factor, local_speed):
       self.local_device = local_device
       self.local_port = local_port

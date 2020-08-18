@@ -44,7 +44,7 @@ class Platform_engine:
       return valid_skus
 
    def match_tor_to_network_reqs(self,rack,candidate_skus):
-      ###FIXME returning first SKU in the list
+      ###FIXME returning first SKU in the list, should have additional logic here like cost, etc
       valid_skus = []
       skus_to_delete = []
       for sku in candidate_skus:
@@ -65,3 +65,11 @@ class Platform_engine:
             valid_skus.append(candidate_skus[idx])
       return valid_skus
 
+   def match_skus_to_link_reqs(self,links):
+     ###FIXME returning first SKU in the list, should have additional logic here like cost, etc
+     candidate_skus = copy.deepcopy(self.sku_list)
+     valid_skus = []
+     for sku in candidate_skus:
+        if sku.ports.can_support_link_requirements(links):
+           valid_skus.append(sku) 
+     return valid_skus[0] 

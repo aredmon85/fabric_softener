@@ -73,41 +73,22 @@ class Ports:
       else:
          return True
 
-   def generate_tor_links(self, tor_name, rack):
-      tor_links = []
-      required_ports = rack.host_ports.count
-      rport_list = rack.host_ports.ports_list
-      for rport in rport_list:
+   def can_support_link_requirements(self, links):
+      required_ports = len(links)
+      for link in links:
          for sport in self.ports_list:
-            if sport['in_use'] is False and self.is_form_factor_compatible(sport['form_factor'],rport['form_factor']):
-               if self.is_intersect(rport['speeds'],sport['speeds']):
-                  speed = rport['speeds'][0]
+            if sport['in_use'] is False and self.is_form_factor_compatible(sport['form_factor'],link.local_form_factor):
+               if link.local_speed in sport['speeds']:
                   sport['in_use'] = True
-                  tor_links.append(Link(tor_name, sport['name'], sport['form_factor'], speed))
-                  tor_links[len(tor_links)-1].set_remote_vars("host","host_port",sport['form_factor'],speed)
                   required_ports -= 1
                   break
-
-      required_ports = rack.fabric_ports.count
-      rport_list = rack.fabric_ports.ports_list
-      for rport in rport_list:
-         for sport in self.ports_list:
-            if sport['in_use'] is False and self.is_form_factor_compatible(sport['form_factor'],rport['form_factor']):
-               if self.is_intersect(rport['speeds'],sport['speeds']):
-                  speed = rport['speeds'][0]
-                  sport['in_use'] = True
-                  tor_links.append(Link(tor_name, sport['name'], sport['form_factor'], speed))
-                  tor_links[len(tor_links)-1].set_remote_vars("next_stage","next_stage",sport['form_factor'],speed)
-                  required_ports -= 1
-                  break
-
       ###Reset in_use flag
       for sport in self.ports_list:
          sport['in_use'] = False
       if required_ports > 0:
-         util.log_error_and_exit("generate_tor_links() failed to generate links for TOR "+tor_name)
+         return False
       else:
-         return tor_links
+         return True
 
    def is_form_factor_compatible(self,left_form_factor,right_form_factor):
       if left_form_factor == right_form_factor:

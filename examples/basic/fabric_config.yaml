@@ -35,6 +35,7 @@ fabric:
       loopbacks:  
          range: 10.99.0.0/16 
          exclude:
+            - 10.99.0.0/32
             - 10.99.0.1/32
       management_network: 
          range: 10.125.0.0/16
